@@ -17,7 +17,8 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>usuarios</module>
+        <module>ms-usuarios</module>
+        <module>ms-cursos</module>
     </modules>
     <properties>
         <maven.compiler.source>25</maven.compiler.source>

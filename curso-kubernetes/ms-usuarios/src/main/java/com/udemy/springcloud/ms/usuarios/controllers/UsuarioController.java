@@ -24,7 +24,7 @@ public class UsuarioController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<?> detalle(@PathVariable(name = "id") Long id){
+    public ResponseEntity<?> detalle(@PathVariable Long id){
         Optional<Usuario> usuarioOptional = usuarioService.porId(id);
         if(usuarioOptional.isPresent()){
             return ResponseEntity.ok(usuarioOptional.get());
@@ -47,7 +47,7 @@ public class UsuarioController {
 
     @PutMapping("/{id}")
     public ResponseEntity<?> editar(@Valid @RequestBody Usuario usuario, BindingResult result,
-                                    @PathVariable(name = "id") Long id){
+                                    @PathVariable Long id){
         if(result.hasErrors()){
             return validar(result);
         }
@@ -71,7 +71,7 @@ public class UsuarioController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> eliminar(@PathVariable(name = "id") Long id){
+    public ResponseEntity<?> eliminar(@PathVariable Long id){
         Optional<Usuario> usuarioOptional = usuarioService.porId(id);
         if(usuarioOptional.isPresent()){
             usuarioService.eliminar(id);

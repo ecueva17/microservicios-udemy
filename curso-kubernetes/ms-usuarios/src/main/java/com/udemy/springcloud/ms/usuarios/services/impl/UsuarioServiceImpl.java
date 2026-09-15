@@ -1,5 +1,6 @@
 package com.udemy.springcloud.ms.usuarios.services.impl;
 
+import com.udemy.springcloud.ms.usuarios.clients.CursoClienteRest;
 import com.udemy.springcloud.ms.usuarios.models.entity.Usuario;
 import com.udemy.springcloud.ms.usuarios.repositories.UsuarioRepository;
 import com.udemy.springcloud.ms.usuarios.services.UsuarioService;
@@ -15,6 +16,9 @@ public class UsuarioServiceImpl implements UsuarioService {
 
     @Autowired
     private UsuarioRepository usuarioRepository;
+
+    @Autowired
+    private CursoClienteRest cursoClienteRest;
 
     @Override
     @Transactional(readOnly = true)
@@ -38,6 +42,13 @@ public class UsuarioServiceImpl implements UsuarioService {
     @Transactional
     public void eliminar(Long id) {
         usuarioRepository.deleteById(id);
+        cursoClienteRest.eliminarCursoUsuarioPorId(id);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<Usuario> listarPorIds(Iterable<Long> ids) {
+        return (List<Usuario>) usuarioRepository.findAllById(ids);
     }
 
     @Override
